@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employee Hub</title>
+  assets/style.css
+</head>
+<body>
+
+  <!-- LOGIN SCREEN (visible by default) -->
+  <section id="loginScreen" class="login-screen" aria-labelledby="loginTitle">
+    <h2 id="loginTitle">Employee Hub Login</h2>
+
+    <form id="loginForm" onsubmit="login(); return false;" novalidate>
+      <div class="form-row">
+        <label for="emailInput">Email</label>
+        <input
+          id="emailInput"
+          name="email"
+          type="email"
+          placeholder="Email"
+          autocomplete="email"
+          required
+        />
+      </div>
+
+      <div class="form-row">
+        <label for="passwordInput">Password</label>
+        <input
+          id="passwordInput"
+          name="password"
+          type="password"
+          placeholder="Password"
+          autocomplete="current-password"
+          required
+        />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">Login</button>
+        <button type="button" class="link" onclick="forgotPassword()">Forgot password?</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- MAIN APP (hidden until login) -->
+  <div id="app" class="app hidden">
+    <aside class="sidebar" aria-label="Primary">
+      <h1 class="app-title">Employee Hub</h1>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><button type="button" onclick="showTab('home')">Home</button></li>
+          <li><button type="button" onclick="showTab('training')">Training</button></li>
+          <li><button type="button" onclick="showTab('policies')">Policies</button></li>
+          <li><button type="button" onclick="showTab('help')">Help</button></li>
+          <li><button type="button" onclick="logout()">Logout</button></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="app-header">
+        <div class="user-block">
+          <small id="userInfo" aria-live="polite"></small>
+        </div>
+
+        <div class="header-actions">
+          <!-- Optional dark mode toggle -->
+          <button id="themeToggle" class="btn-secondary" type="button" aria-pressed="false">
+            Toggle Dark Mode
+          </button>
+
+          <!-- Admin button: hidden until an admin logs in -->
+          <button id="adminBtn" class="btn-admin hidden" type="button">Admin</button>
+        </div>
+      </header>
+
+      <section id="tabContent" class="content">
+        <!-- HOME -->
+        <section id="home" class="tab active" aria-labelledby="homeTitle">
+          <div class="card">
+            <h2 id="homeTitle">Welcome to Employee Hub</h2>
+            <p>Use the sidebar to navigate through training, policies, and more.</p>
+          </div>
+        </section>
+
+        <!-- TRAINING -->
+        <section id="training" class="tab" aria-labelledby="trainingTitle">
+          <div class="section-header">
+            <h2 id="trainingTitle">Training Modules</h2>
+            <!-- Add Training: hidden until admin login -->
+            <button
+              id="editTrainingBtn"
+              class="btn-primary hidden"
+              type="button"
+              onclick="editTraining()"
+            >
+              Add Training
+            </button>
+          </div>
+
+          <div id="trainingSection" class="grid"></div>
+        </section>
+
+        <!-- POLICIES -->
+        <section id="policies" class="tab" aria-labelledby="policiesTitle">
+          <div class="section-header">
+            <h2 id="policiesTitle">Policies</h2>
+            <!-- Add Policy: hidden until admin login -->
+            <button
+              id="editPoliciesBtn"
+              class="btn-primary hidden"
+              type="button"
+              onclick="editPolicies()"
+            >
+              Add Policy
+            </button>
+          </div>
+
+          <div id="policiesSection" class="grid"></div>
+        </section>
+
+        <!-- HELP -->
+        <section id="help" class="tab" aria-labelledby="helpTitle">
+          <div class="card">
+            <h2 id="helpTitle">Help &amp; Support</h2>
+            <p>
+              Contact HR at <strong><a href="mailtony.comhr@company.com</a></strong>
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <!-- ADMIN PANEL (hidden until admin login and toggle) -->
+      <section id="adminPanel" class="admin-panel hidden" aria-labelledby="adminPanelTitle">
+        <h3 id="adminPanelTitle">Admin Panel</h3>
+        <div class="card">
+          <div class="flex-row">
+            <button type="button" class="btn-admin" onclick="addUser()">Add User</button>
+          </div>
+          <p class="muted">Future features: user management, reporting, imports.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- MODAL FOR EDITING (hidden by default) -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <h3 id="modalTitle">Edit Item</h3>
+
+      <div class="form-row">
+        <label for="modalInputTitle">Title</label>
+        <input type="text" id="modalInputTitle" placeholder="Title" />
+      </div>
+
+      <div class="form-row">
+        <label for="modalInputBody">Body</label>
+        <textarea id="modalInputBody" placeholder="Body"></textarea>
+      </div>
+
+      <div class="modal-buttons">
+        <button class="btn-primary" type="button" onclick="saveModal()">Save</button>
+        <button class="btn-secondary" type="button" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Important: use correct path & add cache-bust to avoid stale JS on Git  <!-- Important: use correct path & add cache-bust to avoid stale JS on GitHub -->
+  assets/app.js?v=1</script>
+</body>
