@@ -1,0 +1,325 @@
+/* ============================
+   THEME TOKENS
+================================*/
+:root {
+  --primary: #4f46e5;     /* indigo-600 */
+  --secondary: #64748b;   /* slate-500 */
+  --success: #16a34a;     /* green-600 */
+  --danger: #dc2626;      /* red-600 */
+
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #0f172a;        /* slate-900 */
+  --text-muted: #475569;  /* slate-600 */
+  --border: #e5e7eb;      /* gray-200 */
+
+  --sidebar-bg: #111827;  /* slate-900 */
+  --sidebar-text: #ffffff;
+  --sidebar-hover: #1f2937; /* slate-800 */
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 6px 18px rgba(0,0,0,0.10);
+
+  --radius: 14px;
+
+  --duration: 160ms;
+  --easing: cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+/* Dark theme overrides (manual toggle) */
+.theme-dark {
+  --bg: #0b1220;
+  --surface: #0f172a;
+  --text: #e5e7eb;
+  --text-muted: #94a3b8;
+  --border: #1f2937;
+
+  --sidebar-bg: #0b1220;
+  --sidebar-text: #e5e7eb;
+  --sidebar-hover: #1f2937;
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.35);
+  --shadow-md: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+/* Respect OS preference unless manual toggle applied */
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-dark) {
+    --bg: #0b1220;
+    --surface: #0f172a;
+    --text: #e5e7eb;
+    --text-muted: #94a3b8;
+    --border: #1f2937;
+
+    --sidebar-bg: #0b1220;
+    --sidebar-text: #e5e7eb;
+    --sidebar-hover: #1f2937;
+
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.35);
+    --shadow-md: 0 6px 18px rgba(0,0,0,0.45);
+  }
+}
+
+/* ============================
+   BASE
+================================*/
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.hidden { display: none !important; }
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button {
+  border: none;
+  cursor: pointer;
+  transition: filter var(--duration) var(--easing), transform var(--duration) var(--easing), box-shadow var(--duration) var(--easing);
+}
+
+button:hover { transform: translateY(-1px); }
+
+/* ============================
+   LAYOUT
+================================*/
+.app {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 1rem;
+  border-right: 1px solid var(--border);
+}
+
+.app-title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list li + li { margin-top: 0.5rem; }
+
+.nav-list button {
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  background: transparent;
+  color: inherit;
+  border-radius: 10px;
+}
+
+.nav-list button:hover {
+  background: var(--sidebar-hover);
+}
+
+.main {
+  padding: 1.25rem 1.5rem;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.user-block small { color: var(--text-muted); }
+
+.content {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Clear section separation */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0 0.5rem;
+}
+
+/* Cards & grid */
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1rem;
+}
+
+.card h3 {
+  margin: 0 0 0.5rem;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), #7c3aed);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(99, 102, 241, 0.25);
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #0f172a;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+}
+
+.theme-dark .btn-secondary {
+  background: #1f2937;
+  color: #e5e7eb;
+}
+
+.btn-admin {
+  background: #111827;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+}
+
+.completed {
+  color: var(--success);
+  font-weight: 600;
+}
+
+/* Admin panel */
+.admin-panel {
+  margin-top: 1rem;
+}
+
+.flex-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ============================
+   LOGIN SCREEN
+================================*/
+.login-screen {
+  max-width: 420px;
+  margin: 10vh auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 1.25rem;
+}
+
+.login-screen h2 {
+  margin: 0 0 1rem;
+}
+
+.form-row { margin-bottom: 0.75rem; }
+.form-row label {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  color: var(--text-muted);
+}
+
+.form-row input,
+.form-row textarea {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.link {
+  color: var(--primary);
+  background: transparent;
+  padding: 0.4rem 0.5rem;
+}
+
+/* ============================
+   MODAL
+================================*/
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 1rem;
+  width: min(480px, 92vw);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* ============================
+   TABS
+================================*/
+.tab { display: none; }
+.tab.active { display: block; }
+
+/* ============================
+   MOBILE
+================================*/
+@media (max-width: 768px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .nav-list {
+    display: grid;
+    grid-template-columns: repeat(3,    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
